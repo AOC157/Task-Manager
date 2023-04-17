@@ -40,6 +40,24 @@ public class TaskService {
     }
 
     public List<Task> findTasksByUserId(Long userId) {
-        return taskRepository.findByUserId(userId);
+        return taskRepository.findAllByUserId(userId);
+    }
+
+    public List<Task> filter(String email, String title) {
+        return taskRepository.findAllByUserEmail(email)
+                .stream()
+                .filter((task) -> task.getTitle().contains(title))
+                .toList();
+    }
+
+    public List<Task> filterByTitle(String title) {
+        return taskRepository.findAll()
+                .stream()
+                .filter((task -> task.getTitle().contains(title)))
+                .toList();
+    }
+
+    public List<Task> filterByEmail(String email) {
+        return taskRepository.findAllByUserEmail(email);
     }
 }
