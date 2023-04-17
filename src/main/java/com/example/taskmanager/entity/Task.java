@@ -8,28 +8,28 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
-    private Long userId;
-    private String title;
-    private Boolean completed;
 
-    public Task(Long id, Long userId, String title, Boolean completed) {
-        this.id = id;
-        this.userId = userId;
-        this.title = title;
-        this.completed = completed;
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private String title;
+
+    private Boolean completed;
 
     public Task() {
 
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
+
+
 
     public String getTitle() {
         return title;
