@@ -1,6 +1,6 @@
 package com.example.taskmanager.controller;
 
-import com.example.taskmanager.entity.Task;
+import com.example.taskmanager.dto.TaskDTO;
 import com.example.taskmanager.filter.TaskFilter;
 import com.example.taskmanager.service.TaskService;
 import org.springframework.http.HttpStatus;
@@ -20,14 +20,14 @@ public class TaskController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Task>> getAllTasks() {
-        List<Task> tasks = taskService.findAllTasks();
+    public ResponseEntity<List<TaskDTO>> getAllTasks() {
+        List<TaskDTO> tasks = taskService.findAllTasks();
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @PostMapping("/filter")
-    public ResponseEntity<List<Task>> filterTasks(@RequestBody TaskFilter filter) {
-        List<Task> tasks;
+    public ResponseEntity<List<TaskDTO>> filterTasks(@RequestBody TaskFilter filter) {
+        List<TaskDTO> tasks;
         if (filter.getEmail() != null && filter.getTitle() != null) {
             tasks = taskService.filter(filter.getEmail(), filter.getTitle());
         } else if (filter.getEmail() == null && filter.getTitle() != null) {
