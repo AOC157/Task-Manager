@@ -11,23 +11,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    private String name;
-    private String username;
-    private String email;
-    private String website;
-    private String phone;
+    private String street;
+    private String suite;
+    private String city;
+    private String zipcode;
+    private String lat;
+    private String lng;
 
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
-
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Company company;
 }
