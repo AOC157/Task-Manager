@@ -1,5 +1,6 @@
 package com.example.taskmanager.entity;
 
+import com.example.taskmanager.entity.enumeration.Method;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,11 +20,12 @@ public class Trace {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String request;
-
+    private String requestURI;
+    private Method method;
+    private String requestBody;
     @Column(columnDefinition = "LONGTEXT")
-    private String response;
-
+    private String responseBody;
+    private Integer status;
     private LocalDateTime date;
 
 }
