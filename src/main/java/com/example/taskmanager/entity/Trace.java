@@ -17,13 +17,13 @@ import java.time.LocalDateTime;
 public class Trace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
     private String requestURI;
     private Method method;
     private String requestBody;
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "LONGTEXT")  //Response body may be very large, so I use "LONGTEXT" datatype to store this field in database
     private String responseBody;
     private Integer status;
     private LocalDateTime date;
