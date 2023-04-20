@@ -1,0 +1,98 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="hatef (generated)" id="1681996123392-1">
+        <createTable tableName="address">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="lat" type="VARCHAR(255)"/>
+            <column name="lng" type="VARCHAR(255)"/>
+            <column name="street" type="VARCHAR(255)"/>
+            <column name="suite" type="VARCHAR(255)"/>
+            <column name="zipcode" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-2">
+        <createTable tableName="company">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="bs" type="VARCHAR(255)"/>
+            <column name="catch_phrase" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-3">
+        <createTable tableName="task">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueBoolean="false" name="completed" type="BIT"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column defaultValueComputed="NULL" name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-4">
+        <createTable tableName="trace">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueComputed="NULL" name="date" type="datetime"/>
+            <column defaultValueComputed="NULL" name="method" type="SMALLINT"/>
+            <column name="request_body" type="VARCHAR(255)"/>
+            <column name="requesturi" type="VARCHAR(255)"/>
+            <column name="response_body" type="LONGTEXT"/>
+            <column defaultValueComputed="NULL" name="status" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-5">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="website" type="VARCHAR(255)"/>
+            <column defaultValueComputed="NULL" name="address_id" type="BIGINT"/>
+            <column defaultValueComputed="NULL" name="company_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-6">
+        <createIndex indexName="FK2hsytmxysatfvt0p1992cw449" tableName="task">
+            <column defaultValueComputed="NULL" name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-7">
+        <createIndex indexName="FK2yuxsfrkkrnkn5emoobcnnc3r" tableName="user">
+            <column defaultValueComputed="NULL" name="company_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-8">
+        <createIndex indexName="FKddefmvbrws3hvl5t0hnnsv8ox" tableName="user">
+            <column defaultValueComputed="NULL" name="address_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-9">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="task"
+                                 constraintName="FK2hsytmxysatfvt0p1992cw449" deferrable="false"
+                                 initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-10">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="user"
+                                 constraintName="FK2yuxsfrkkrnkn5emoobcnnc3r" deferrable="false"
+                                 initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="company" validate="true"/>
+    </changeSet>
+    <changeSet author="hatef (generated)" id="1681996123392-11">
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="user"
+                                 constraintName="FKddefmvbrws3hvl5t0hnnsv8ox" deferrable="false"
+                                 initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="address" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
