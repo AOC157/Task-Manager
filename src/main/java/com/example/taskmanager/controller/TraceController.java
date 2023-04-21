@@ -1,7 +1,7 @@
 package com.example.taskmanager.controller;
 
 import com.example.taskmanager.entity.Trace;
-import com.example.taskmanager.repository.TraceRepository;
+import com.example.taskmanager.service.TraceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +14,15 @@ import java.util.List;
 @RequestMapping
 public class TraceController {
 
-    private final TraceRepository traceRepository;
+    private final TraceService traceService;
 
-    public TraceController(TraceRepository traceRepository) {
-        this.traceRepository = traceRepository;
+    public TraceController(TraceService traceService) {
+        this.traceService = traceService;
     }
 
     @GetMapping("/history")
     public ResponseEntity<List<Trace>> getTraces() {
-        List<Trace> traces = traceRepository.findAll();
+        List<Trace> traces = traceService.findAllTraces();
         return new ResponseEntity<>(traces, HttpStatus.OK);
     }
 }
